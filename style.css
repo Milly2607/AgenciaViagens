@@ -1,0 +1,571 @@
+:root {
+    --bg-color: #f4f4f9;
+    --text-color: #333333;
+    --card-bg: #ffffff;
+    --primary-color: #194f89;
+    --primary-hover: #0f3865;
+    --border-color: #e0e0e0;
+}
+
+.dark-theme {
+    --bg-color: #1a1a2e;
+    --text-color: #e6e6e6;
+    --card-bg: #16213e;
+    --primary-color: #103d70;
+    --primary-hover: #144381;
+    --border-color: #0f3460;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Header estilizado */
+header {
+    background-color: var(--card-bg);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+}
+
+.logo {
+    font-size: 1.4rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.menu {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.menu a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.menu a:hover {
+    color: var(--primary-color);
+}
+
+.btn-tema {
+    background-color: transparent;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+/* Estrutura Base */
+.container {
+    max-width: 1000px;
+    margin: 3rem auto;
+    padding: 1rem;
+}
+
+.hero {
+    text-align: center;
+    padding: 4rem 1rem;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Cards e Carrossel */
+.carrossel-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+    width: 100%;
+}
+
+.grid-cards {
+    display: flex;
+    gap: 20px;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    flex-wrap: nowrap;
+    width: 100%;
+    padding: 10px 0;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    padding: 1rem;
+    width: 300px;
+    flex: 0 0 auto;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+}
+
+.card-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.preco {
+    display: block;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.card-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.btn-seta {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background-color 0.2s;
+}
+
+.btn-seta:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Container do Simulador */
+.simulador-box {
+    background-color: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.simulador-box h2 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 1.8rem;
+    color: var(--text-color);
+}
+
+.simulador-subtitulo {
+    color: #666;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+}
+
+/* Grid Principal (Divide Formulário e Card de Resultado) */
+.simulador-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 30px;
+    align-items: start;
+}
+
+@media (max-width: 768px) {
+    .simulador-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Formulário e Inputs */
+.simulador-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full-width {
+    grid-column: span 2;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.simulador-box label {
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: var(--text-color);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.simulador-box input, 
+.simulador-box select {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.simulador-box input:focus, 
+.simulador-box select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+}
+
+/* Botão Calcular */
+.btn-calcular {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.1s, background-color 0.2s;
+    margin-top: 10px;
+}
+
+.btn-calcular:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-calcular:active {
+    transform: scale(0.98);
+}
+
+/* Card do Resultado (Lado Direito) */
+.resultado-card {
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.resultado-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 8px;
+    display: inline-block;
+}
+
+.resultado-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+}
+
+.resultado-item.total {
+    font-size: 1.1rem;
+}
+
+.resultado-item.total strong {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+}
+
+.divisor {
+    border: 0;
+    border-top: 1px solid var(--border-color);
+    margin: 5px 0;
+}
+
+/* Container Principal do Perfil */
+.perfil-box {
+    background-color: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.perfil-box h2 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 1.8rem;
+    color: var(--text-color);
+}
+
+.perfil-subtitulo {
+    color: #666;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+}
+
+/* Grid Layout (Alinhado com o Simulador) */
+.perfil-grid {
+    display: grid;
+    grid-template-columns: 0.7fr 1.3fr;
+    gap: 30px;
+    align-items: start;
+}
+
+@media (max-width: 768px) {
+    .perfil-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Cartão da Esquerda (Avatar e Informações) */
+.perfil-card-info {
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    padding: 25px 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.perfil-avatar-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.perfil-avatar {
+    font-size: 3.5rem;
+    background-color: var(--card-bg);
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.btn-trocar-foto {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-trocar-foto:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.perfil-card-info h3 {
+    margin: 5px 0;
+    font-size: 1.1rem;
+}
+
+.badge-status {
+    background-color: rgba(0, 123, 255, 0.1);
+    color: var(--primary-color);
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 4px 12px;
+    border-radius: 12px;
+    margin-top: 5px;
+}
+
+/* Formulário do Perfil */
+.perfil-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.perfil-box label {
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: var(--text-color);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.perfil-box input {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.perfil-box input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+}
+
+.btn-salvar-perfil {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.1s, background-color 0.2s;
+    margin-top: 10px;
+}
+
+.btn-salvar-perfil:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-salvar-perfil:active {
+    transform: scale(0.98);
+}
+
+/* Estilização dos Cards */
+.card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.2rem;
+    width: 300px;
+    flex: 0 0 auto;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+}
+
+.card-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.card h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+
+.card p {
+    margin: 0 0 12px 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.preco {
+    display: block;
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+.preco strong {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+/* Contentor dos Botões */
+.card-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+}
+
+/* Botão Favoritar */
+.btn-favoritar {
+    flex: 1;
+    background-color: transparent;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 10px 8px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.btn-favoritar:hover {
+    background-color: #ffe6e6;
+    border-color: #ff4d4d;
+    color: #d63031;
+}
+
+/* Botão Comprar Passagem */
+.btn-comprar {
+    flex: 1.4;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 8px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.btn-comprar:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-comprar:active {
+    transform: scale(0.97);
+}

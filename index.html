@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViajaFácil - Reserva de Destinos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">✈️ <span>VamoViajar</span></div>
+            <ul id="menu" class="menu">
+                <li><a href="#destinos">Destinos</a></li>
+                <li><a href="#simulador">Simulador</a></li>
+                <li><a href="#perfil">Perfil</a></li>
+            </ul>
+            <button id="btn-tema" class="btn-tema">🌑 Modo Escuro</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Encontre o seu próximo destino</h1>
+            <p>Explore o Brasil com as melhores tarifas.</p>
+        </section>
+
+        <!-- Seção de Destinos -->
+        <section id="destinos" class="container">
+            <h2>Destinos em Destaque</h2>
+            
+            <div class="carrossel-wrapper">
+                <!-- Botão Voltar -->
+                <button class="btn-seta" id="btn-prev">&#10094;</button>
+                
+                <div class="grid-cards" id="carrossel-cards">
+                    <!-- 1. Monte Verde -->
+                    <div class="card">
+                        <img src="assets/Monte Verde.jpeg" alt="Monte Verde" class="card-img">
+                        <h3>Monte Verde, MG</h3>
+                        <p>Clima de montanha e natureza.</p>
+                        <span class="preco">Diária: R$ 350</span>
+                        <div class="card-buttons">
+                            <button class="btn-favoritar">🤍 Favoritar</button>
+                            <button class="btn-comprar">🛒 Comprar Passagem</button>
+                        </div>
+                    </div>
+
+                    <!-- 2. Curitiba -->
+                    <div class="card">
+                        <img src="assets/Curitiba.jpeg" alt="Curitiba" class="card-img">
+                        <h3>Curitiba, PR</h3>
+                        <p>Parques incríveis e cultura.</p>
+                        <span class="preco">Diária: R$ 280</span>
+                        <div class="card-buttons">
+                            <button class="btn-favoritar">🤍 Favoritar</button>
+                            <button class="btn-comprar">🛒 Comprar Passagem</button>
+                        </div>
+                    </div>
+
+                    <!-- 3. Rio de Janeiro -->
+                    <div class="card">
+                        <img src="assets/Rio De Janeiro.jpeg" alt="Rio de Janeiro" class="card-img">
+                        <h3>Rio de Janeiro, RJ</h3>
+                        <p>Muita praia e diversão.</p>
+                        <span class="preco">Diária: R$ 500</span>
+                        <div class="card-buttons">
+                            <button class="btn-favoritar">🤍 Favoritar</button>
+                            <button class="btn-comprar">🛒 Comprar Passagem</button>
+                        </div>
+                    </div>
+
+                    <!-- 4. Gramado -->
+                    <div class="card">
+                        <img src="assets/Gramado.jpeg" alt="Gramado" class="card-img">
+                        <h3>Gramado, RS</h3>
+                        <p>Muito frio e chocolate.</p>
+                        <span class="preco">Diária: R$ 340</span>
+                        <div class="card-buttons">
+                            <button class="btn-favoritar">🤍 Favoritar</button>
+                            <button class="btn-comprar">🛒 Comprar Passagem</button>
+                        </div>
+                    </div>
+
+                    <!-- 5. Brasília -->
+                    <div class="card">
+                        <img src="assets/Brasilia.jpeg" alt="Brasília" class="card-img">
+                        <h3>Brasília, DF</h3>
+                        <p>Visite a capital do Brasil!</p>
+                        <span class="preco">Diária: R$ 250</span>
+                        <div class="card-buttons">
+                            <button class="btn-favoritar">🤍 Favoritar</button>
+                            <button class="btn-comprar">🛒 Comprar Passagem</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botão Avançar -->
+                <button class="btn-seta" id="btn-next">&#10095;</button>
+            </div>
+        </section>
+
+        <!-- Simulador de Reservas -->
+        <section id="simulador" class="container simulador-box">
+            <h2>Simulador de Estadia</h2>
+            <p class="simulador-subtitulo">Calcule o valor estimado da sua viagem em poucos cliques.</p>
+            
+            <div class="simulador-grid">
+                <!-- Lado Esquerdo: Formulário -->
+                <form class="simulador-form" onsubmit="return false;">
+                    <div class="form-group full-width">
+                        <label for="destino">Destino de Interesse</label>
+                        <select id="destino">
+                            <option value="">Selecione um Destino</option>
+                            <option value="350">Monte Verde, MG - R$350/diária</option>
+                            <option value="280">Curitiba, PR - R$280/diária</option>
+                            <option value="500">Rio de Janeiro, RJ - R$500/diária</option>
+                            <option value="340">Gramado, RS - R$340/diária</option>
+                            <option value="250">Brasília, DF - R$250/diária</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="checkin">Data de Entrada</label>
+                            <input type="date" id="checkin">
+                        </div>
+                        <div class="form-group">
+                            <label for="checkout">Data de Saída</label>
+                            <input type="date" id="checkout">
+                        </div>
+                    </div>
+        
+                    <button type="button" id="btn-calcular" class="btn-calcular">Calcular Resumo</button>
+                </form>
+        
+                <!-- Lado Direito: Card do Resultado -->
+                <div class="resultado-card">
+                    <h3>Resumo da Reserva</h3>
+                    <div class="resultado-item">
+                        <span>Valor por diária:</span>
+                        <strong id="valor-diaria">R$ 0,00</strong>
+                    </div>
+                    <div class="resultado-item">
+                        <span>Total de noites:</span>
+                        <strong id="qtd-dias">0 noites</strong>
+                    </div>
+                    <hr class="divisor">
+                    <div class="resultado-item total">
+                        <span>Valor Total Estimado:</span>
+                        <strong id="valor-total">R$ 0,00</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Aba/Seção de Perfil -->
+<section id="perfil" class="container perfil-box">
+    <h2>Meu Perfil</h2>
+    <p class="perfil-subtitulo">Gerencie suas informações pessoais e preferências de conta.</p>
+
+    <div class="perfil-grid">
+        <!-- Card da Esquerda: Foto e Status -->
+        <div class="perfil-card-info">
+            <div class="perfil-avatar-wrapper">
+                <div class="perfil-avatar">👤</div>
+                <button class="btn-trocar-foto">Alterar Foto</button>
+            </div>
+            <h3>Viajante Frequente</h3>
+            <span class="badge-status">⭐ Membro VIP</span>
+        </div>
+
+        <!-- Card da Direita: Formulário -->
+        <form id="form-perfil" class="perfil-form" onsubmit="return false;">
+            <div class="form-group">
+                <label for="nome">Nome Completo</label>
+                <input type="text" id="nome" value="Viajante Frequente" placeholder="Seu nome completo">
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" value="viajante@email.com" placeholder="seuemail@exemplo.com">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="telefone">Telefone</label>
+                    <input type="tel" id="telefone" value="(11) 99999-9999" placeholder="(00) 00000-0000">
+                </div>
+                <div class="form-group">
+                    <label for="cidade">Cidade/UF</label>
+                    <input type="text" id="cidade" value="São Paulo, SP" placeholder="Sua cidade">
+                </div>
+            </div>
+
+            <button type="submit" class="btn-salvar-perfil">Salvar Alterações</button>
+        </form>
+    </div>
+</section>
+
+    <script src="script.js"></script>
+</body>
+</html>
