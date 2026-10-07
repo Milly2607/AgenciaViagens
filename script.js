@@ -12,8 +12,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const idAlvo = this.getAttribute('data-target');
 
-            botoesAba.forEach(btn => btn.classList.remove('ativo'));
+            botoesAba.forEach(btn => {
+                btn.classList.remove('ativo');
+                btn.setAttribute('aria-pressed', 'false');
+            });
             this.classList.add('ativo');
+            this.setAttribute('aria-pressed', 'true');
 
             secoesAba.forEach(secao => secao.classList.remove('ativa'));
             
@@ -31,24 +35,47 @@ document.addEventListener('DOMContentLoaded', function() {
     const btnPrev = document.getElementById('btn-prev');
     const btnNext = document.getElementById('btn-next');
     const btnTema = document.getElementById('btn-tema');
-    const tamanhoRolagem = 320;
+    const deslocamentoCarrossel = () => {
+        const card = containerCards.firstElementChild;
+        const gap = parseFloat(getComputedStyle(containerCards).gap) || 0;
+        return card ? card.getBoundingClientRect().width + gap : containerCards.clientWidth;
+    };
+    const comportamentoRolagem = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
      
     if (btnNext && containerCards) {
         btnNext.addEventListener('click', function() {
-            containerCards.scrollBy({ left: tamanhoRolagem, behavior: 'smooth' });
+            containerCards.scrollBy({ left: deslocamentoCarrossel(), behavior: comportamentoRolagem() });
         });
     }
      
     if (btnPrev && containerCards) {
         btnPrev.addEventListener('click', function() {
-            containerCards.scrollBy({ left: -tamanhoRolagem, behavior: 'smooth' });
+            containerCards.scrollBy({ left: -deslocamentoCarrossel(), behavior: comportamentoRolagem() });
         });
     }
      
     if (btnTema) {
+        let temaSalvo = false;
+        try {
+            temaSalvo = localStorage.getItem('techjourney-tema') === 'escuro';
+        } catch (_) {
+            // O tema continua funcionando quando o armazenamento está indisponível.
+        }
+        const atualizarTema = (escuro) => {
+            document.body.classList.toggle('dark-theme', escuro);
+            btnTema.innerText = escuro ? '☀️ Claro' : '🌙 Escuro';
+            btnTema.setAttribute('aria-pressed', String(escuro));
+            btnTema.setAttribute('aria-label', escuro ? 'Ativar modo claro' : 'Ativar modo escuro');
+        };
+        atualizarTema(temaSalvo);
         btnTema.addEventListener('click', function() {
-            document.body.classList.toggle('dark-theme');
-            btnTema.innerText = document.body.classList.contains('dark-theme') ? '☀️ Claro' : '🌙 Escuro';
+            const escuro = !document.body.classList.contains('dark-theme');
+            atualizarTema(escuro);
+            try {
+                localStorage.setItem('techjourney-tema', escuro ? 'escuro' : 'claro');
+            } catch (_) {
+                // A preferência permanece ativa nesta página.
+            }
         });
     }
      
@@ -63,6 +90,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const spanCarreira = document.getElementById('resultado-carreira');
         const spanNivel = document.getElementById('resultado-nivel');
         const spanSalario = document.getElementById('valor-salario');
+        const erroSimulador = document.getElementById('erro-simulador');
+        const moeda = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
      
         const salarios = {
             frontend: { nome: 'Desenvolvedor Front-End', junior: 3000, pleno: 5500, senior: 9000 },
@@ -84,20 +113,30 @@ document.addEventListener('DOMContentLoaded', function() {
      
         btnCalcular.addEventListener('click', function() {
             if (!selectCarreira.value) {
-                alert('Por favor, selecione uma carreira!');
+                erroSimulador.textContent = 'Selecione uma carreira para calcular.';
+                erroSimulador.hidden = false;
+                selectCarreira.setAttribute('aria-invalid', 'true');
+                selectCarreira.focus();
                 return;
             }
             if (!selectNivel.value) {
-                alert('Por favor, selecione o nível de experiência!');
+                erroSimulador.textContent = 'Selecione um nível de experiência para calcular.';
+                erroSimulador.hidden = false;
+                selectNivel.setAttribute('aria-invalid', 'true');
+                selectNivel.focus();
                 return;
             }
+            erroSimulador.hidden = true;
+            erroSimulador.textContent = '';
+            selectCarreira.removeAttribute('aria-invalid');
+            selectNivel.removeAttribute('aria-invalid');
      
             const carreiraEscolhida = salarios[selectCarreira.value];
             const salario = carreiraEscolhida[selectNivel.value];
      
             spanCarreira.innerText = carreiraEscolhida.nome;
             spanNivel.innerText = nomesNivel[selectNivel.value];
-            spanSalario.innerText = 'R$ ' + salario.toFixed(2).replace('.', ',');
+            spanSalario.innerText = moeda.format(salario);
             spanSalario.style.color = '#2e7d32';
         });
     }
@@ -174,6 +213,49 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalCarreira = document.getElementById('modal-carreira');
     const btnFecharCarreira = document.getElementById('btn-fechar-modal');
     const botoesSaibaMais = document.querySelectorAll('.btn-comprar');
+    let modalAtivo = null;
+    let focoAnterior = null;
+
+    function abrirModal(modal, acionador) {
+        focoAnterior = acionador;
+        modalAtivo = modal;
+        modal.style.display = 'flex';
+        modal.querySelector('.fechar-modal').focus();
+    }
+
+    function fecharModal() {
+        if (!modalAtivo) return;
+        modalAtivo.style.display = 'none';
+        modalAtivo = null;
+        if (focoAnterior) focoAnterior.focus();
+        focoAnterior = null;
+    }
+
+    document.addEventListener('keydown', function(event) {
+        if (!modalAtivo) return;
+        if (event.key === 'Escape') {
+            event.preventDefault();
+            fecharModal();
+            return;
+        }
+        if (event.key !== 'Tab') return;
+        const focaveis = [...modalAtivo.querySelectorAll('button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])')]
+            .filter(elemento => !elemento.disabled);
+        if (!focaveis.length) {
+            event.preventDefault();
+            modalAtivo.querySelector('.modal-conteudo').focus();
+            return;
+        }
+        const primeiro = focaveis[0];
+        const ultimo = focaveis[focaveis.length - 1];
+        if (event.shiftKey && document.activeElement === primeiro) {
+            event.preventDefault();
+            ultimo.focus();
+        } else if (!event.shiftKey && document.activeElement === ultimo) {
+            event.preventDefault();
+            primeiro.focus();
+        }
+    });
 
     botoesSaibaMais.forEach(botao => {
         botao.addEventListener('click', function() {
@@ -187,14 +269,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('modal-mercado').innerText = info.mercado;
                 document.getElementById('modal-cursos').innerText = info.cursos;
 
-                modalCarreira.style.display = 'flex';
+                abrirModal(modalCarreira, this);
             }
         });
     });
 
     if (btnFecharCarreira) {
         btnFecharCarreira.addEventListener('click', function() {
-            modalCarreira.style.display = 'none';
+            fecharModal();
         });
     }
 
@@ -265,25 +347,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('modal-lang-titulo').innerText = info.titulo;
                 document.getElementById('modal-lang-descricao').innerText = info.descricao;
 
-                modalLinguagem.style.display = 'flex';
+                abrirModal(modalLinguagem, this);
             }
         });
     });
 
     if (btnFecharLang) {
         btnFecharLang.addEventListener('click', function() {
-            modalLinguagem.style.display = 'none';
+            fecharModal();
         });
     }
 
     // Fechar os modais ao clicar fora da caixa branca
     window.addEventListener('click', function(event) {
-        if (event.target === modalCarreira) {
-            modalCarreira.style.display = 'none';
-        }
-        if (event.target === modalLinguagem) {
-            modalLinguagem.style.display = 'none';
-        }
+        if (event.target === modalAtivo) fecharModal();
     });
 
 });
