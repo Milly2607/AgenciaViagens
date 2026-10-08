@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore profissões de tecnologia, conheça linguagens e experimente um simulador salarial ilustrativo.">
     <title>TechJourney - Viagem pelas Profissões de TI</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <a href="#carreiras" class="pular-conteudo">Pular para o conteúdo</a>
  
     <header>
-        <nav class="navbar">
+        <nav class="navbar" aria-label="Navegação principal">
             <div class="logo">🚀 TechJourney</div>
             <ul id="menu" class="menu">
-                <li><button type="button" class="btn-aba ativo" data-target="carreiras">Carreiras</button></li>
-                <li><button type="button" class="btn-aba" data-target="simulador">Simulador</button></li>
-                <li><button type="button" class="btn-aba" data-target="linguagens">Linguagens</button></li>
+                <li><button type="button" class="btn-aba ativo" data-target="carreiras" aria-controls="carreiras" aria-pressed="true">Carreiras</button></li>
+                <li><button type="button" class="btn-aba" data-target="simulador" aria-controls="simulador" aria-pressed="false">Simulador</button></li>
+                <li><button type="button" class="btn-aba" data-target="linguagens" aria-controls="linguagens" aria-pressed="false">Linguagens</button></li>
             </ul>
-            <button id="btn-tema" aria-label="Alternar entre modo claro e escuro">🌙 Escuro</button>
+            <button type="button" id="btn-tema" aria-label="Ativar modo escuro" aria-pressed="false">🌙 Escuro</button>
         </nav>
     </header>
  
@@ -34,84 +36,84 @@
             <div class="carrossel-wrapper">
                 <button class="btn-seta" id="btn-prev" aria-label="Carreira anterior">&#10094;</button>
             
-                <div class="grid-cards" id="carrossel-cards">
+                <div class="grid-cards" id="carrossel-cards" tabindex="0" aria-label="Carreiras em destaque">
                     <div class="card">
-                        <div class="card-img-box"><img src="assets/Front End.jpeg" alt="Front-End"></div>
+                        <div class="card-img-box"><img src="assets/Front End.jpeg" alt="" loading="lazy" width="300" height="160"></div>
                         <h3>Desenvolvedor Front-End</h3>
                         <p>Cria a parte visual dos sites e aplicações que o usuário vê e interage.</p>
-                        <span class="preco">💰 Média salarial: R$ 4.500</span>
+                        <span class="preco">💰 Exemplo salarial: R$ 4.500</span>
                         <span class="tecnologias">🛠️ HTML, CSS, JavaScript, React</span>
                         <button class="btn-comprar" data-carreira="frontend">📖 Saiba Mais</button>
                     </div>
 
                     <div class="card">
-                        <div class="card-img-box"><img src="assets/Back End.jpeg" alt="Back-End"></div>
+                        <div class="card-img-box"><img src="assets/Back End.jpeg" alt="" loading="lazy" width="300" height="160"></div>
                         <h3>Desenvolvedor Back-End</h3>
                         <p>Constrói a lógica, APIs e banco de dados que fazem tudo funcionar por trás.</p>
-                        <span class="preco">💰 Média salarial: R$ 5.200</span>
+                        <span class="preco">💰 Exemplo salarial: R$ 5.200</span>
                         <span class="tecnologias">🛠️ Node.js, Python, Java, PHP</span>
                         <button class="btn-comprar" data-carreira="backend">📖 Saiba Mais</button>
                     </div>
 
                     <div class="card">
-                        <div class="card-img-box"><img src="assets/Mobile.jpeg" alt="Mobile"></div>
+                        <div class="card-img-box"><img src="assets/Mobile.jpeg" alt="" loading="lazy" width="300" height="160"></div>
                         <h3>Desenvolvedor Mobile</h3>
                         <p>Desenvolve aplicativos para celulares Android e iOS.</p>
-                        <span class="preco">💰 Média salarial: R$ 5.800</span>
+                        <span class="preco">💰 Exemplo salarial: R$ 5.800</span>
                         <span class="tecnologias">🛠️ React Native, Flutter, Kotlin</span>
                         <button class="btn-comprar" data-carreira="mobile">📖 Saiba Mais</button>
                     </div>
 
                     <div class="card">
-                        <div class="card-img-box"><img src="assets/Banco de Dados.jpeg" alt="Banco de Dados"></div>
+                        <div class="card-img-box"><img src="assets/Banco de Dados.jpeg" alt="" loading="lazy" width="300" height="160"></div>
                         <h3>Administrador de Banco de Dados</h3>
                         <p>Gerencia, organiza e protege os dados que os sistemas armazenam.</p>
-                        <span class="preco">💰 Média salarial: R$ 5.000</span>
+                        <span class="preco">💰 Exemplo salarial: R$ 5.000</span>
                         <span class="tecnologias">🛠️ MySQL, PostgreSQL, MongoDB</span>
                         <button class="btn-comprar" data-carreira="dba">📖 Saiba Mais</button>
                     </div>
 
                     <div class="card">
-                        <div class="card-img-box"><img src="assets/Segurança.jpeg" alt="Segurança"></div>
+                        <div class="card-img-box"><img src="assets/Segurança.jpeg" alt="" loading="lazy" width="300" height="160"></div>
                         <h3>Segurança da Informação</h3>
                         <p>Protege sistemas contra ataques, invasões e vazamento de dados.</p>
-                        <span class="preco">💰 Média salarial: R$ 6.500</span>
+                        <span class="preco">💰 Exemplo salarial: R$ 6.500</span>
                         <span class="tecnologias">🛠️ Linux, Redes, Pentest, Python</span>
                         <button class="btn-comprar" data-carreira="seguranca">📖 Saiba Mais</button>
                     </div>
 
                     <div class="card">
-                        <div class="card-img-box"><img src="assets/Engenheiro DevOps.jpeg" alt="DevOps"></div>
+                        <div class="card-img-box"><img src="assets/Engenheiro DevOps.jpeg" alt="" loading="lazy" width="300" height="160"></div>
                         <h3>Engenheiro DevOps</h3>
                         <p>Automatiza a integração, testes e publicação contínua de sistemas na nuvem.</p>
-                        <span class="preco">💰 Média salarial: R$ 7.000</span>
+                        <span class="preco">💰 Exemplo salarial: R$ 7.000</span>
                         <span class="tecnologias">🛠️ Docker, Kubernetes, AWS, CI/CD</span>
                         <button class="btn-comprar" data-carreira="devops">📖 Saiba Mais</button>
                     </div>
 
                     <div class="card">
-                        <div class="card-img-box"><img src="assets/Cientista de Dados.jpeg" alt="Dados"></div>
+                        <div class="card-img-box"><img src="assets/Cientista de Dados.jpeg" alt="" loading="lazy" width="300" height="160"></div>
                         <h3>Cientista de Dados</h3>
                         <p>Analisa grandes volumes de dados para prever tendências e ajudar decisões.</p>
-                        <span class="preco">💰 Média salarial: R$ 7.500</span>
+                        <span class="preco">💰 Exemplo salarial: R$ 7.500</span>
                         <span class="tecnologias">🛠️ Python, R, SQL, Machine Learning</span>
                         <button class="btn-comprar" data-carreira="dados">📖 Saiba Mais</button>
                     </div>
 
                     <div class="card">
-                        <div class="card-img-box"><img src="assets/UxUi.jpeg" alt="UX/UI"></div>
+                        <div class="card-img-box"><img src="assets/UxUi.jpeg" alt="" loading="lazy" width="300" height="160"></div>
                         <h3>Designer UX/UI</h3>
                         <p>Projeta a experiência, navegação e o visual amigável das aplicações.</p>
-                        <span class="preco">💰 Média salarial: R$ 4.800</span>
+                        <span class="preco">💰 Exemplo salarial: R$ 4.800</span>
                         <span class="tecnologias">🛠️ Figma, Adobe XD, Prototipagem</span>
                         <button class="btn-comprar" data-carreira="uxui">📖 Saiba Mais</button>
                     </div>
 
                     <div class="card">
-                        <div class="card-img-box"><img src="assets/Analista de QA.jpeg" alt="QA"></div>
+                        <div class="card-img-box"><img src="assets/Analista de QA.jpeg" alt="" loading="lazy" width="300" height="160"></div>
                         <h3>Analista de QA / Testes</h3>
                         <p>Garante a qualidade do código encontrando falhas e bugs antes do lançamento.</p>
-                        <span class="preco">💰 Média salarial: R$ 4.200</span>
+                        <span class="preco">💰 Exemplo salarial: R$ 4.200</span>
                         <span class="tecnologias">🛠️ Selenium, Cypress, Testes Manuais/Auto</span>
                         <button class="btn-comprar" data-carreira="qa">📖 Saiba Mais</button>
                     </div>
@@ -119,13 +121,14 @@
  
                 <button class="btn-seta" id="btn-next" aria-label="Próxima carreira">&#10095;</button>
             </div>
+            <p class="nota-salarios">Os valores são exemplos ilustrativos; a remuneração real varia por região, empresa e experiência.</p>
         </section>
  
         <!-- ABA 2: SIMULADOR DE SALÁRIO -->
         <section id="simulador" class="container aba-conteudo">
             <div class="simulador-box">
                 <h2>Simulador de Salário</h2>
-                <p>Descubra quanto um profissional de TI pode ganhar de acordo com a carreira e o nível de experiência!</p>
+                <p>Explore exemplos de remuneração por carreira e nível de experiência. Os valores são ilustrativos, não uma pesquisa salarial.</p>
                 
                 <div class="form-group">
                     <label for="carreira">Carreira:</label>
@@ -154,11 +157,12 @@
                 </div>
 
                 <button id="btn-calcular" class="btn-calcular">Calcular Salário</button>
+                <p id="erro-simulador" class="erro-simulador" role="alert" hidden></p>
                
                 <div class="resultado">
                     <p>💼 Carreira: <strong id="resultado-carreira">-</strong></p>
                     <p>📊 Nível: <strong id="resultado-nivel">-</strong></p>
-                    <p>💰 Salário estimado: <strong id="valor-salario">R$ 0,00</strong></p>
+                    <p>💰 Valor ilustrativo: <strong id="valor-salario">R$ 0,00</strong></p>
                 </div>
             </div>
         </section>
@@ -187,9 +191,9 @@
         </section>
 
         <!-- Modal de Carreiras -->
-        <div id="modal-carreira" class="modal">
-            <div class="modal-conteudo">
-                <span id="btn-fechar-modal" class="fechar-modal">&times;</span>
+        <div id="modal-carreira" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+            <div class="modal-conteudo" tabindex="-1">
+                <button type="button" id="btn-fechar-modal" class="fechar-modal" aria-label="Fechar detalhes da carreira">&times;</button>
                 <h2 id="modal-titulo">Título</h2>
                 <p id="modal-descricao">Descrição...</p>
                 <div class="modal-detalhes">
@@ -201,9 +205,9 @@
         </div>
 
         <!-- Modal de Linguagens -->
-        <div id="modal-linguagem" class="modal">
-            <div class="modal-conteudo">
-                <span id="btn-fechar-modal-lang" class="fechar-modal">&times;</span>
+        <div id="modal-linguagem" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-lang-titulo">
+            <div class="modal-conteudo" tabindex="-1">
+                <button type="button" id="btn-fechar-modal-lang" class="fechar-modal" aria-label="Fechar detalhes da linguagem">&times;</button>
                 <h2 id="modal-lang-titulo">Título</h2>
                 <p id="modal-lang-descricao" style="margin-top: 15px; font-size: 1.1rem; line-height: 1.5;">Descrição...</p>
             </div>

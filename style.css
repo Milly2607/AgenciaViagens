@@ -137,8 +137,9 @@ body {
 .grid-cards {
     display: flex;
     gap: 20px;
-    overflow-x: hidden;
+    overflow-x: auto;
     scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
     flex-wrap: nowrap;
     width: 100%;
     padding: 15px 5px;
@@ -154,6 +155,7 @@ body {
     box-sizing: border-box;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid rgba(0,0,0,0.05);
+    scroll-snap-align: start;
 }
 
 .card:hover {
@@ -225,6 +227,16 @@ body {
     margin-bottom: 5px;
 }
 
+.dark-theme .preco {
+    color: #86efac;
+}
+
+.nota-salarios {
+    font-size: 0.9rem;
+    text-align: center;
+    opacity: 0.85;
+}
+
 .tecnologias {
     display: block;
     font-size: 0.85rem;
@@ -274,6 +286,19 @@ body {
 
 .form-group select:focus {
     border-color: var(--primary-color);
+}
+
+.form-group select[aria-invalid="true"] {
+    border-color: #b91c1c;
+}
+
+.erro-simulador {
+    color: #b91c1c;
+    font-weight: 600;
+}
+
+.dark-theme .erro-simulador {
+    color: #fca5a5;
 }
 
 .btn-calcular {
@@ -355,6 +380,8 @@ body {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
     border-top: 6px solid var(--modal-border);
     animation: popupZoom 0.3s ease;
+    max-height: min(90vh, 720px);
+    overflow-y: auto;
 }
 
 .modal-conteudo h2 {
@@ -372,6 +399,10 @@ body {
     color: var(--text-color);
     opacity: 0.6;
     transition: opacity 0.2s;
+    background: transparent;
+    border: 0;
+    line-height: 1;
+    padding: 4px 8px;
 }
 
 .fechar-modal:hover {
@@ -406,6 +437,19 @@ body {
     top: 10px;
 }
 
+:focus-visible {
+    outline: 3px solid #f59e0b;
+    outline-offset: 3px;
+}
+
+.form-group select:focus-visible {
+    outline: 3px solid #f59e0b;
+}
+
+[hidden] {
+    display: none !important;
+}
+
 footer {
     text-align: center;
     padding: 1.8rem;
@@ -434,5 +478,85 @@ footer {
     to {
         opacity: 1;
         transform: scale(1);
+    }
+}
+
+@media (max-width: 700px) {
+    .navbar {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        padding: 0.8rem 1rem;
+    }
+
+    .logo {
+        flex: 1 1 auto;
+    }
+
+    .menu {
+        order: 3;
+        width: 100%;
+        overflow-x: auto;
+        gap: 4px;
+        justify-content: space-between;
+    }
+
+    .btn-aba {
+        padding: 8px 10px;
+        white-space: nowrap;
+    }
+
+    .hero {
+        padding: 2rem 1rem;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .container {
+        margin: 1rem auto;
+        padding: 0.75rem;
+    }
+
+    .carrossel-wrapper {
+        display: block;
+    }
+
+    .grid-cards {
+        padding-inline: 40px;
+        box-sizing: border-box;
+    }
+
+    .card {
+        width: min(76vw, 300px);
+    }
+
+    .btn-seta {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1;
+        width: 40px;
+        height: 40px;
+    }
+
+    #btn-prev { left: 0; }
+    #btn-next { right: 0; }
+
+    .btn-seta:hover {
+        transform: translateY(-50%) scale(1.05);
+    }
+
+    .simulador-box {
+        padding: 1.5rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }
